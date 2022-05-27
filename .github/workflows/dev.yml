@@ -51,7 +51,7 @@ jobs:
       - name: Install the first python venv
         run: inv install -p latest
 
-      - name: Check formatting
+      - name: Launch tests
         run: inv test-cov
 
       # comment this

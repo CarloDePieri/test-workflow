@@ -5,7 +5,7 @@ import os
 from invoke import task
 
 
-package_name = "pkg"
+package_name = "carlodepieri_test_workflow"
 poetry_pypi_testing = "testpypi"
 
 # Supported python version list - these must also be valid executable in your path
