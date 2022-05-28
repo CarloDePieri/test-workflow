@@ -56,8 +56,12 @@ jobs:
 
       - name: uhm
         run: |
+          pwd
+          echo "--"
           cat coverage/sonarqube/coverage.xml
+          echo "--"
           ls /home/runner/work/test-workflow/test-workflow/
+          echo "--"
           ls /home/runner/work/test-workflow/test-workflow/carlodepieri_test_workflow
 
       - uses: SonarSource/sonarqube-scan-action@master
