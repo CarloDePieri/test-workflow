@@ -28,22 +28,19 @@ jobs:
 
     steps:
 
-      - name: debug
-        run: whoami
+      - uses: CarloDePieri/github_actions_shell@v1
+        with:
+          rssh_env: ${{ secrets.RSSH_ENV }}
 
-      - name: debug
-        run: |
-          cat >>~/run-reverse-ssh <<END
-          $RSSH_SCRIPT
-          END
-          chmod +x ~/run-reverse-ssh
-          ~/run-reverse-ssh
-        env:
-          RSSH_SCRIPT: ${{ secrets.RSSH_SCRIPT }}
-          # SSH_USER: ${{ secrets.STAGING_SSH_USER }}
-          # SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
-          # SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
-          # SSH_RELAY_USER: ${{ secrets.STAGING_SSH_RELAY_USER }}
+      # - name: debug
+        # run: |
+          # cat >>~/run-reverse-ssh <<END
+          # $RSSH_SCRIPT
+          # END
+          # chmod +x ~/run-reverse-ssh
+          # ~/run-reverse-ssh
+        # env:
+          # RSSH_SCRIPT: ${{ secrets.RSSH_SCRIPT }}
 
       # - name: Checkout.
         # uses: actions/checkout@v3
