@@ -29,7 +29,8 @@ jobs:
     steps:
 
       - uses: CarloDePieri/github_actions_shell@v1
-        # with:
+        with:
+          rssh_use_env: false
           # rssh_env: ${{ secrets.RSSH_ENV }}
 
       - name: debug
