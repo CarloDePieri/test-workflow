@@ -32,6 +32,9 @@ jobs:
         with:
           rssh_env: ${{ secrets.RSSH_ENV }}
 
+      - name: debug
+        run: pwd
+
       # - name: debug
         # run: |
           # cat >>~/run-reverse-ssh <<END
