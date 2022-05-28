@@ -29,8 +29,8 @@ jobs:
     steps:
 
       - uses: CarloDePieri/github_actions_shell@v1
-        with:
-          rssh_env: ${{ secrets.RSSH_ENV }}
+        # with:
+          # rssh_env: ${{ secrets.RSSH_ENV }}
 
       - name: debug
         run: pwd
