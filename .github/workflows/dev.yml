@@ -54,24 +54,9 @@ jobs:
       - name: Launch tests
         run: inv test-cov
 
-      - name: uhm
-        run: |
-          echo "--"
-          pwd
-          echo "--"
-          cat coverage/sonarqube/coverage.xml
-          echo "--"
-          ls /home/runner/work/test-workflow/test-workflow/
-          echo "--"
-          ls /home/runner/work/test-workflow/test-workflow/carlodepieri_test_workflow
-
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        with:
-          ## limits ssh access and adds the ssh public key for the user which triggered the workflow
-          limit-access-to-actor: true
-          ## limits ssh access and adds the ssh public keys of the listed GitHub users
-          limit-access-to-users: CarloDePieri
+      - name: Fix coverage path.
+        if: ${{ !env.ACT }}
+        run: sed -i 's#${{ env.$GITHUB_WORKSPACE }}#/github/workspace#' coverage/sonarqube/coverage.xml
 
       - uses: SonarSource/sonarqube-scan-action@master
         if: ${{ !env.ACT }}
