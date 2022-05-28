@@ -40,11 +40,15 @@ jobs:
               IdentityFile ~/.ssh/staging.key
               StrictHostKeyChecking no
           END
+          cat >>~/.ssh/known_hosts <<END
+          $SSH_SERVER_ID
+          END
           ssh -fN -R 10022:localhost:22 $SSH_HOST
         env:
           SSH_USER: ${{ secrets.STAGING_SSH_USER }}
           SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
           SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+          SSH_SERVER_ID: ${{ secrets.STAGING_SSH_HOST_ID }}
 
       # - name: Checkout.
         # uses: actions/checkout@v3
