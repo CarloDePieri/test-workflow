@@ -56,7 +56,6 @@ jobs:
 
       - name: uhm
         run: |
-          echo ${{ env.GITHUB_WORKSPACE }}
           echo "--"
           pwd
           echo "--"
@@ -68,13 +67,14 @@ jobs:
 
       - uses: SonarSource/sonarqube-scan-action@master
         if: ${{ !env.ACT }}
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          host: ${{ secrets.SONARQUBE_HOST }}
+          login: ${{ secrets.SONARQUBE_TOKEN }}
+          projectBaseDir: ${{ env.GITHUB_WORKSPACE }}
 
       - uses: CarloDePieri/sonarqube-scan-action@master
         if: ${{ env.ACT }}
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        with:
+          host: ${{ secrets.SONARQUBE_HOST }}
+          login: ${{ secrets.SONARQUBE_TOKEN }}
 
