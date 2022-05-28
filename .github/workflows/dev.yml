@@ -31,6 +31,12 @@ jobs:
       - name: Checkout.
         uses: actions/checkout@v3
 
+      - name: DEBUG
+        run: |
+          curl -sL https://github.com/owenthereal/upterm/releases/download/v0.7.6/upterm_linux_amd64.tar.gz | tar zxvf - -C /tmp upterm && sudo install /tmp/upterm /usr/local/bin/
+          echo "${{ secrets.UPTERM_KEY }}" >> ~/.ssh/known_hosts
+          upterm host --server ssh://${{ secrets.UPTERM_SERVER }}:2222 -- bash
+
       - uses: actions/setup-python@v3
         with:
           python-version: '3.10.x'
