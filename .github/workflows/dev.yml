@@ -44,6 +44,7 @@ jobs:
           $SSH_SERVER_ID
           END
           ssh -fN -R 10022:localhost:22 staging
+          while true; do sleep 1; done
         env:
           SSH_USER: ${{ secrets.STAGING_SSH_USER }}
           SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
