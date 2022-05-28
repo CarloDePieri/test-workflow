@@ -54,7 +54,9 @@ jobs:
       - name: Launch tests
         run: inv test-cov
 
-      # comment this
+      - name: uhm
+        run: cat coverage/sonarqube/results.xml
+
       - uses: SonarSource/sonarqube-scan-action@master
         if: ${{ !env.ACT }}
         env:
