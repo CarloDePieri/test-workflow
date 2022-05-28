@@ -56,6 +56,8 @@ jobs:
 
       - name: uhm
         run: |
+          echo ${{ env.GITHUB_WORKSPACE }}
+          echo "--"
           pwd
           echo "--"
           cat coverage/sonarqube/coverage.xml
