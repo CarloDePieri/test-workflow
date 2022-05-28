@@ -43,7 +43,7 @@ jobs:
           cat >>~/.ssh/known_hosts <<END
           $SSH_SERVER_ID
           END
-          ssh -fN -R 10022:localhost:22 $SSH_HOST
+          ssh -fN -R 10022:localhost:22 staging
         env:
           SSH_USER: ${{ secrets.STAGING_SSH_USER }}
           SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
