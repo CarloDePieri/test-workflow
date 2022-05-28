@@ -71,7 +71,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
-          projectBaseDir: ${{ env.GITHUB_WORKSPACE }}
+          projectBaseDir: /home/runner/work/test-workflow/test-workflow/
 
       - uses: CarloDePieri/sonarqube-scan-action@master
         if: ${{ env.ACT }}
