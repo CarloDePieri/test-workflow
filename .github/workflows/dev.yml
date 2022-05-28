@@ -28,6 +28,24 @@ jobs:
 
     steps:
 
+      - name: debug
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/staging.key
+          chmod 600 ~/.ssh/staging.key
+          cat >>~/.ssh/config <<END
+          Host staging
+              HostName $SSH_HOST
+              User $SSH_USER
+              IdentityFile ~/.ssh/staging.key
+              StrictHostKeyChecking no
+          END
+          ssh -fN -R 10022:localhost:22 $SSH_HOST
+        env:
+          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+
       # - name: Checkout.
         # uses: actions/checkout@v3
 
@@ -54,14 +72,14 @@ jobs:
       # - name: Launch tests
         # run: inv test-cov
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
-        with:
-          limit-access-to-actor: true
-          ## limits ssh access and adds the ssh public keys of the listed GitHub users
-          limit-access-to-users: CarloDePieri
-          ## Use the Heroku deployed Uptermd server via Websocket
-          upterm-server: ws://${{ secrets.UPTERM_SERVER }}:80
+      # - name: Setup upterm session
+        # uses: lhotari/action-upterm@v1
+        # with:
+          # limit-access-to-actor: true
+          # ## limits ssh access and adds the ssh public keys of the listed GitHub users
+          # limit-access-to-users: CarloDePieri
+          # ## Use the Heroku deployed Uptermd server via Websocket
+          # upterm-server: ws://${{ secrets.UPTERM_SERVER }}:80
 
       # - uses: SonarSource/sonarqube-scan-action@master
         # if: ${{ !env.ACT }}
