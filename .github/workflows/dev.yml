@@ -29,6 +29,9 @@ jobs:
     steps:
 
       - name: debug
+        run: whoami
+
+      - name: debug
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_KEY" > ~/.ssh/staging.key
