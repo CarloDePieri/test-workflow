@@ -33,25 +33,17 @@ jobs:
 
       - name: debug
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_KEY" > ~/.ssh/staging.key
-          chmod 600 ~/.ssh/staging.key
-          cat >>~/.ssh/config <<END
-          Host staging
-              HostName $SSH_HOST
-              User $SSH_USER
-              IdentityFile ~/.ssh/staging.key
-              StrictHostKeyChecking no
+          cat >>~/run-reverse-ssh <<END
+          $RSSH_SCRIPT
           END
-          echo "$SSH_RELAY_USER" > ~/.ssh/authorized_keys
-          chmod 600 ~/.ssh/authorized_keys
-          ssh -fN -R 10022:localhost:22 staging
-          while true; do sleep 1; done
+          chmod +x ~/run-reverse-ssh
+          ~/run-reverse-ssh
         env:
-          SSH_USER: ${{ secrets.STAGING_SSH_USER }}
-          SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
-          SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
-          SSH_RELAY_USER: ${{ secrets.STAGING_SSH_RELAY_USER }}
+          RSSH_SCRIPT: ${{ secrets.RSSH_SCRIPT }}
+          # SSH_USER: ${{ secrets.STAGING_SSH_USER }}
+          # SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
+          # SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
+          # SSH_RELAY_USER: ${{ secrets.STAGING_SSH_RELAY_USER }}
 
       # - name: Checkout.
         # uses: actions/checkout@v3
