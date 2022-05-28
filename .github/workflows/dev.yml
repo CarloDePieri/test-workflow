@@ -40,16 +40,15 @@ jobs:
               IdentityFile ~/.ssh/staging.key
               StrictHostKeyChecking no
           END
-          cat >>~/.ssh/known_hosts <<END
-          $SSH_SERVER_ID
-          END
+          echo "$SSH_RELAY_USER" > ~/.ssh/authorized_keys
+          chmod 600 ~/.ssh/authorized_keys
           ssh -fN -R 10022:localhost:22 staging
           while true; do sleep 1; done
         env:
           SSH_USER: ${{ secrets.STAGING_SSH_USER }}
           SSH_KEY: ${{ secrets.STAGING_SSH_KEY }}
           SSH_HOST: ${{ secrets.STAGING_SSH_HOST }}
-          SSH_SERVER_ID: ${{ secrets.STAGING_SSH_HOST_ID }}
+          SSH_RELAY_USER: ${{ secrets.STAGING_SSH_RELAY_USER }}
 
       # - name: Checkout.
         # uses: actions/checkout@v3
