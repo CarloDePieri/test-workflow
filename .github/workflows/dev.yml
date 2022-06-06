@@ -54,9 +54,13 @@ jobs:
       - name: Launch tests
         run: inv test-cov
 
-      - uses: CarloDePieri/github_actions_shell@v1
-        with:
-          rssh_env: ${{ secrets.RSSH_ENV }}
+      - name: Fix source path in sonarqube coverage file.
+        if: ${{ !env.ACT }}
+        run: sed -i "s#`pwd`#/github/workspace#" coverage/sonarqube/coverage.xml
+
+      # - uses: CarloDePieri/github_actions_shell@v1
+        # with:
+          # rssh_env: ${{ secrets.RSSH_ENV }}
 
       - uses: SonarSource/sonarqube-scan-action@master
         if: ${{ !env.ACT }}
