@@ -2,3 +2,5 @@
 /.secrets
 /coverage/
 /.venv/
+/.scannerwork/
+**/__pycache__/*

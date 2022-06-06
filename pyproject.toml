@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "pkg"
-version = "0.1.0"
+name = "carlodepieri_test_workflow"
+version = "0.1.1"
 description = ""
 authors = ["Carlo De Pieri <depieri.carlo@gmail.com>"]
 packages = [
-  { include = "pkg" }
+  { include = "carlodepieri_test_workflow" }
 ]
 
 [tool.poetry.dependencies]
