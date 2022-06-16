@@ -20,7 +20,7 @@ jobs:
 
       - name: Install sphinx
         run: |
-          pip install -U Sphinx
+          pip install -U Sphinx sphinx-rtd-theme
 
       - name: Build docs
         run: |
