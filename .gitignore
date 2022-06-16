@@ -4,3 +4,4 @@
 /.venv/
 /.scannerwork/
 **/__pycache__/*
+docs/build
