@@ -28,7 +28,11 @@ jobs:
 
     steps:
 
-      - run: pipx --version
+      - run: pipx install poetry
+
+      - run: poetry --version
+
+      - run: exit 1
 
       - name: Checkout.
         uses: actions/checkout@v3
